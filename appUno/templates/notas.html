@@ -1,0 +1,85 @@
+{% extends "./basenotas.html" %}
+
+{% block title %} Notas {% endblock %}
+
+
+{% block body %}
+
+<div class="row">
+    <div class="col-3">
+        <center><h3>Gestión Notas</h3></center>
+        <div class="card", >
+            <div class="card-body">
+                
+                {% for apunte in nom_con %}
+                <form action="/RegistrarNotas/{{apunte.id_contacto}}" method="POST">{% csrf_token %}
+                    
+                    {% endfor %}                    
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" value="{{apunte.nombre}}" class="form-control" placeholder="Titulo"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcontenido" name="txtcontenido" value="{{apunte.contenido}}" class="form-control" placeholder="Descripcion" 
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-block text-white">Guardar</button>
+                    </div>
+                    
+
+                    <script type="text/javascript">
+                        function articleToCartMain() {
+                            articleToCart('<z:esc mode="js" value=$z:value[article.number]>', document.getElementById('amount$z:iteration[article.current]').value);
+                            //Put other function calls in here as well
+                            return false; //Prevents the page from reloading or scrolling to top
+                        }
+                    </script>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-9 ">
+        <div class="card">
+            <div class="card-body">
+                <center><h3>Lista de Notas</h3></center>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Titulo</th>
+                                <th>Contenido</th>
+                                <th colspan="2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for apunte in apunte %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    
+                                    <td>{{apunte.nombre}}</td>
+                                    <td>{{apunte.contenido}}</td>
+                                    <td><a href="/EditarNotas/{{apunte.nombre}}" class="btn btn-info">Editar</a></td>
+                                    <td><a href="/EliminarNota/{{apunte.id_apunte}}" class="btn btn-danger btnEliminar">Eliminar</a></td>
+                                </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button >
+    <strong class="text-dark">{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

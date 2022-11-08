@@ -1,0 +1,41 @@
+{% extends "./base.html" %}
+
+{% block title %} Contactos {% endblock %}
+
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Contacto</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/EditarContacto/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input  style="background-color:rgb(123, 205, 237)" type="text" id="txtcedula" name="txtcedula" readonly value="{{contacto.cedula}}" class="form-control" placeholder="Cedula" min="1" max="9"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <input  type="text" id="txtnombres" name="txtnombres" value="{{contacto.nombres}}" class="form-control" placeholder="Nombre"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtapellidos" name="txtapellidos" value="{{contacto.apellidos}}" class="form-control" placeholder="Apellidos" 
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcelular" name="txtcelular" value="{{contacto.celular}}" class="form-control" placeholder="Celular" min="1" max="9"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtemail" name="txtemail" value="{{contacto.email}}" class="form-control"placeholder="Gmail" min="1" max="9"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

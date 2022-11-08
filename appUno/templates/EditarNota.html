@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+
+{% block title %} Contactos {% endblock %}
+
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Nota</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="/EditarNota/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input style="background-color:rgb(123, 205, 237);" type="text" id="txtnombre" readonly name="txtnombre" value="{{apunte.nombre}}" class="form-control" placeholder="Titulo"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcontenido" name="txtcontenido" value="{{apunte.contenido}}" class="form-control" placeholder="Contenido" 
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

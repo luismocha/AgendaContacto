@@ -1,0 +1,91 @@
+{% extends "./base.html" %}
+
+{% block title %} Contactos {% endblock %}
+
+
+{% block body %}
+
+<div class="row">
+    <div class="col-3">
+        <center><h3>Gestión Agenda</h3></center>
+        <div class="card", >
+            <div class="card-body">
+                <form action="/RegistrarContacto/" method="POST">{% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtnombres" name="txtnombres" value="{{contacto.nombres}}" class="form-control" placeholder="Nombre"
+                            maxlength="50" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtapellidos" name="txtapellidos" value="{{contacto.apellidos}}" class="form-control" placeholder="Apellidos" 
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcedula" name="txtcedula" value="{{contacto.cedula}}" class="form-control" placeholder="Cedula" min="1" max="9"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtcelular" name="txtcelular" value="{{contacto.celular}}" class="form-control" placeholder="Celular" min="1" max="9"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtemail" name="txtemail" value="{{contacto.email}}" class="form-control"placeholder="Gmail" min="1" max="9"
+                            value="1" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-info btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-9 ">
+        <div class="card">
+            <div class="card-body">
+                <center><h3>Listado de Contactos</h3></center>
+                <div class="table-responsive py-2">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Cedula</th>
+                                <th>Celular</th>
+                                <th>Email</th>
+                                <th>Email</th>
+
+                                <th colspan="3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for contacto in contacto %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{contacto.nombres}}</td>
+                                    <td>{{contacto.apellidos}}</td>
+                                    <td>{{contacto.cedula}}</td>
+                                    <td>{{contacto.celular}}</td>
+                                    <td>{{contacto.email}}</td>
+                                    <td><a href="Notas/{{contacto.id_contacto}}" class="btn btn-success">Notas</a></td>
+                                    <td><a href="EditarContactos/{{contacto.cedula}}" class="btn btn-info">Editar</a></td>
+                                    <td><a href="/EliminarContacto/{{contacto.id_contacto}}" class="btn btn-danger btnEliminar">Eliminar</a></td>
+                                </tr>
+                                {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-dismissible alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button >
+    <strong class="text-dark">{{ message }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
